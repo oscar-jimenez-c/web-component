@@ -53,5 +53,8 @@ class Infobot extends HTMLElement {
         });
       }
     })
+    //this.shadowRoot.querySelector("#name").innerText = "World";
   }
 }
+
+customElements.define("sf-infobot", Infobot);
