@@ -29,7 +29,7 @@ script.addEventListener('load', function () {
         name: 'Infobot',
         companyId: "171095767092461478a944eda8619d060",
         host: "https://missi-six-dev-wvfxsud.uc1.ccaiplatform.com/",
-        launcher: false
+        // launcher: false
       });
   ujet.on('created', function () {
     ujet.authenticate(getAuthToken);
