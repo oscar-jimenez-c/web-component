@@ -43,16 +43,16 @@ class Infobot extends HTMLElement {
     this.shadow = this.attachShadow({ mode: "open" });
     this.shadowRoot.appendChild(script);
     this.shadowRoot.appendChild(template.content.cloneNode(true));
-    var launcher = this.shadowRoot.querySelector('#launcher');
-    launcher.addEventListener('click', function() {
-      if (ujet.status === 'open') {
-        ujet.close();
-      } else {
-        ujet.start({ menuKey: 'VirtualAgent' }).catch(function(error) {
-          console.log('error', error);
-        });
-      }
-    })
+    // var launcher = this.shadowRoot.querySelector('#launcher');
+    // launcher.addEventListener('click', function() {
+    //   if (ujet.status === 'open') {
+    //     ujet.close();
+    //   } else {
+    //     ujet.start({ menuKey: 'VirtualAgent' }).catch(function(error) {
+    //       console.log('error', error);
+    //     });
+    //   }
+    // })
     //this.shadowRoot.querySelector("#name").innerText = "World";
   }
 }
