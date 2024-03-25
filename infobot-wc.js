@@ -22,14 +22,14 @@ const script = document.createElement("script");
 let ujet = undefined;
 script.src = "https://websdk.ujet.co/v2/loader.js"
 template.innerHTML = `
-
+<button id="launcher">Click</button>
 `;
 script.addEventListener('load', function () {
   ujet = new UJET({
         name: 'Infobot',
         companyId: "171095767092461478a944eda8619d060",
         host: "https://missi-six-dev-wvfxsud.uc1.ccaiplatform.com/",
-    // launcher: false
+        launcher: false
       });
   ujet.on('created', function () {
     ujet.authenticate(getAuthToken);
@@ -43,16 +43,16 @@ class Infobot extends HTMLElement {
     this.shadow = this.attachShadow({ mode: "open" });
     this.shadowRoot.appendChild(script);
     this.shadowRoot.appendChild(template.content.cloneNode(true));
-    // var launcher = this.shadowRoot.querySelector('#launcher');
-    // launcher.addEventListener('click', function() {
-    //   if (ujet.status === 'open') {
-    //     ujet.close();
-    //   } else {
-    //     ujet.start({ menuKey: 'VirtualAgent' }).catch(function(error) {
-    //       console.log('error', error);
-    //     });
-    //   }
-    // })
+    var launcher = this.shadowRoot.querySelector('#launcher');
+    launcher.addEventListener('click', function() {
+      if (ujet.status === 'open') {
+        ujet.close();
+      } else {
+        ujet.start({ menuKey: 'VirtualAgent' }).catch(function(error) {
+          console.log('error', error);
+        });
+      }
+    })
     //this.shadowRoot.querySelector("#name").innerText = "World";
   }
 }
