@@ -21,18 +21,25 @@ const template = document.createElement("template");
 const script = document.createElement("script");
 let ujet = undefined;
 script.src = "https://websdk.ujet.co/v2/loader.js"
-template.innerHTML = `
-<button id="launcher">Click</button>
-`;
+template.innerHTML = ``;
 script.addEventListener('load', function () {
   ujet = new UJET({
         name: 'Infobot',
         companyId: "171095767092461478a944eda8619d060",
-        host: "https://missi-six-dev-wvfxsud.uc1.ccaiplatform.com/",
-        // launcher: false
+        menuKey: 'VirtualAgent',
+        host: "https://missi-six-dev-wvfxsud.uc1.ccaiplatform.com/"
       });
   ujet.on('created', function () {
     ujet.authenticate(getAuthToken);
+  });
+  ujet.on('chat:message', function(message) {
+    if(message.type === "text" && message.content === "What park can I help you with?"){
+      let iframe = this.document.querySelector("#ujet-widget");
+      if(iframe && iframe.contentWindow) {
+      }
+      ujet.communicator.send("sdfg")
+    }
+    console.log('chat:message - ' + JSON.stringify(message));
   });
 })
 
@@ -43,17 +50,6 @@ class Infobot extends HTMLElement {
     this.shadow = this.attachShadow({ mode: "open" });
     this.shadowRoot.appendChild(script);
     this.shadowRoot.appendChild(template.content.cloneNode(true));
-    var launcher = this.shadowRoot.querySelector('#launcher');
-    launcher.addEventListener('click', function() {
-      if (ujet.status === 'open') {
-        ujet.close();
-      } else {
-        ujet.start({ menuKey: 'VirtualAgent' }).catch(function(error) {
-          console.log('error', error);
-        });
-      }
-    })
-    //this.shadowRoot.querySelector("#name").innerText = "World";
   }
 }
 
